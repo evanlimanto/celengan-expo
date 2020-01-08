@@ -7,6 +7,7 @@ import TabBarIcon from '../components/TabBarIcon';
 import HomeScreen from '../screens/HomeScreen';
 import LinksScreen from '../screens/LinksScreen';
 import LoginScreen from '../screens/LoginScreen';
+import RegisterScreen from '../screens/RegisterScreen';
 import SettingsScreen from '../screens/SettingsScreen';
 
 const config = {
@@ -21,6 +22,7 @@ const HomeStack = createStackNavigator(
   {
     Login: LoginScreen,
     Home: HomeScreen,
+    Register: RegisterScreen,
   },
   config
 );

@@ -13,20 +13,19 @@ import {
 import getEnvVars from '../environment';
 const { apiUrl } = getEnvVars();
 
-export default class LoginView extends Component {
+export default class RegisterView extends Component {
   constructor(props) {
     super(props);
     this.state = {
       email: '',
       password: '',
     };
-    this.onLoginPress = this.onLoginPress.bind(this);
-    this.onRegisterPress = this.onRegisterPress.bind(this);
+    this.onRegisterClick = this.onRegisterClick.bind(this);
   }
 
-  async onLoginPress() {
+  async onRegisterClick() {
     const { email, password } = this.state;
-    const rawResponse = await fetch(`${apiUrl}/user/login`, {
+    const rawResponse = await fetch(`${apiUrl}/user/register`, {
       method: 'POST',
       headers: {
         'Accept': 'application/json',
@@ -39,10 +38,6 @@ export default class LoginView extends Component {
     });
     await AsyncStorage.setItem('authorization_token', `${email}:${password}`)
     this.props.navigation.navigate('Home');
-  }
-
-  onRegisterPress() {
-    this.props.navigation.navigate('Register');
   }
 
   render() {
@@ -64,15 +59,15 @@ export default class LoginView extends Component {
             onChangeText={(password) => this.setState({password})}/>
         </View>
 
-        <TouchableHighlight style={[styles.buttonContainer, styles.loginButton]} onPress={this.onLoginPress}>
-          <Text style={styles.loginText}>Login</Text>
+        <TouchableHighlight style={[styles.buttonContainer, styles.registerButton]} onPress={this.onRegisterClick}>
+          <Text style={styles.registerText}>Register</Text>
         </TouchableHighlight>
 
         <TouchableHighlight style={styles.buttonContainer} onPress={() => null}>
             <Text>Forgot your password?</Text>
         </TouchableHighlight>
 
-        <TouchableHighlight style={styles.buttonContainer} onPress={this.onRegisterPress}>
+        <TouchableHighlight style={styles.buttonContainer} onPress={() => null}>
           <Text>Register</Text>
         </TouchableHighlight>
       </View>
@@ -119,10 +114,10 @@ const styles = StyleSheet.create({
     width:250,
     borderRadius:30,
   },
-  loginButton: {
+  registerButton: {
     backgroundColor: "#00b5ec",
   },
-  loginText: {
+  registerText: {
     color: 'white',
   }
 });
