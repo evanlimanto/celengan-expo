@@ -6,6 +6,7 @@ import {
   TextInput,
   Button,
   TouchableHighlight,
+  TouchableOpacity,
   Image,
   Alert
 } from 'react-native';
@@ -18,7 +19,9 @@ export default class RegisterView extends Component {
     super(props);
     this.state = {
       email: '',
+      fullName:'',
       password: '',
+      phone: '',
     };
     this.onRegisterClick = this.onRegisterClick.bind(this);
   }
@@ -43,6 +46,7 @@ export default class RegisterView extends Component {
   render() {
     return (
       <View style={styles.container}>
+        <Text style={styles.inputLabel}>Alamat Email</Text>
         <View style={styles.inputContainer}>
           <TextInput style={styles.inputs}
             placeholder="Email"
@@ -50,7 +54,16 @@ export default class RegisterView extends Component {
             underlineColorAndroid='transparent'
             onChangeText={(email) => this.setState({email})}/>
         </View>
-        
+        <Text style={styles.inputLabel}>Nama Lengkap</Text>
+        <View style={styles.inputContainer}>
+          <TextInput style={styles.inputs}
+            placeholder="Full Name"
+            secureTextEntry={true}
+            underlineColorAndroid='transparent'
+            onChangeText={(fullName) => this.setState({fullName})}/>
+        </View>
+
+        <Text style={styles.inputLabel}>Password</Text>
         <View style={styles.inputContainer}>
           <TextInput style={styles.inputs}
             placeholder="Password"
@@ -59,16 +72,31 @@ export default class RegisterView extends Component {
             onChangeText={(password) => this.setState({password})}/>
         </View>
 
-        <TouchableHighlight style={[styles.buttonContainer, styles.registerButton]} onPress={this.onRegisterClick}>
-          <Text style={styles.registerText}>Register</Text>
+        <Text style={styles.inputLabel}>No. Telpon</Text>
+        <View style={styles.inputContainer}>
+          <TextInput style={styles.inputs}
+            placeholder="Phone Number"
+            secureTextEntry={true}
+            underlineColorAndroid='transparent'
+            onChangeText={(phone) => this.setState({phone})}/>
+        </View>
+
+        <TouchableHighlight style={styles.buttonContainer} onPress={this.onRegisterClick}>
+          <Text style={styles.loginText}>Sign Up -></Text>
+        </TouchableHighlight>
+
+        <View style={styles.separator} />
+
+        <TouchableHighlight style={[styles.buttonContainer, styles.buttonOutline]} onPress={this.onLoginPress}>
+          <Text style={styles.loginSocial}>Sign Up With Google</Text>
+        </TouchableHighlight>
+
+        <TouchableHighlight style={[styles.buttonContainer, styles.buttonOutline]} onPress={this.onLoginPress}>
+          <Text style={styles.loginSocial}>Sign Up With Facebook</Text>
         </TouchableHighlight>
 
         <TouchableHighlight style={styles.buttonContainer} onPress={() => null}>
-            <Text>Forgot your password?</Text>
-        </TouchableHighlight>
-
-        <TouchableHighlight style={styles.buttonContainer} onPress={() => null}>
-          <Text>Register</Text>
+          <Text style={styles.loginText}>Login</Text>
         </TouchableHighlight>
       </View>
     );
@@ -79,25 +107,31 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: '#DCDCDC',
+    alignItems: 'flex-start',
+    margin:16,
   },
   inputContainer: {
-      borderBottomColor: '#F5FCFF',
-      backgroundColor: '#FFFFFF',
-      borderRadius:30,
-      borderBottomWidth: 1,
-      width:250,
+      borderColor: '#CBCEDB',
+      backgroundColor: '#E2E4EE',
+      borderRadius:4,
+      borderWidth: 1,
+      width:'100%',
       height:45,
-      marginBottom:20,
+      marginBottom:12,
       flexDirection: 'row',
       alignItems:'center'
   },
   inputs:{
-      height:45,
-      marginLeft:16,
+      height: 45,
+      marginLeft: 16,
       borderBottomColor: '#FFFFFF',
       flex:1,
+  },
+  inputLabel:{
+      fontSize: 14,
+      textAlign: 'left',
+      marginBottom: 4,
+      width: '100%',
   },
   inputIcon:{
     width:30,
@@ -110,14 +144,36 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'center',
     alignItems: 'center',
-    marginBottom:20,
-    width:250,
-    borderRadius:30,
+    marginBottom:12,
+    width:'100%',
+    borderRadius:4,
+    backgroundColor: "#07152F",
   },
-  registerButton: {
-    backgroundColor: "#00b5ec",
+  buttonLink:{
+    paddingTop:4,
   },
-  registerText: {
+  buttonOutline:{
+    borderColor: "#07152F",
+    backgroundColor: '#ffffff',
+    borderRadius:4,
+    borderWidth: 1,
+  },  
+  loginText: {
     color: 'white',
+    fontWeight: 'bold'
+  },
+  loginSocial: {
+    color:  "#07152F",
+    fontWeight: 'bold'
+  },
+  forgotPassword:{
+    textAlign: 'left',
+  },
+  separator: {
+    marginBottom: 16,
+    width: '100%',
+    borderBottomColor: '#07152F',
+    borderBottomWidth: StyleSheet.hairlineWidth,
   }
 });
+

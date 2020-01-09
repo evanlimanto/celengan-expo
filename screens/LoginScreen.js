@@ -49,7 +49,7 @@ export default class LoginView extends Component {
   render() {
     return (
       <View style={styles.container}>
-        <Text style={styles.inputLabel}>Email</Text>
+        <Text style={styles.inputLabel}>Alamat Email</Text>
         <View style={styles.inputContainer}>
           <TextInput style={styles.inputs}
             placeholder="Email"
@@ -60,7 +60,6 @@ export default class LoginView extends Component {
         
         <Text style={styles.inputLabel}>Password</Text>
         <View style={styles.inputContainer}>
-          
           <TextInput style={styles.inputs}
             placeholder="Password"
             secureTextEntry={true}
