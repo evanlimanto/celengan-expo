@@ -2,16 +2,11 @@ import * as WebBrowser from 'expo-web-browser';
 import React from 'react';
 import {
   ActivityIndicator,
-  Image,
-  Platform,
-  ScrollView,
   StyleSheet,
   Text,
-  TouchableHighlight,
-  TouchableOpacity,
   View,
 } from 'react-native';
-import { ListItem } from 'react-native-elements';
+import { Button, Icon, ListItem } from 'react-native-elements';
 import { StackActions } from 'react-navigation';
 
 import { MonoText } from '../components/StyledText';
@@ -24,7 +19,7 @@ export default class HomeScreen extends React.Component {
     this.state = {
       items: null,
     };
-    this.navigateHome = this.navigateHome.bind(this);
+    this.logout = this.logout.bind(this);
   }
 
   componentDidMount() {
@@ -42,7 +37,8 @@ export default class HomeScreen extends React.Component {
       .catch(console.error);
   }
 
-  navigateHome() {
+  async logout() {
+    await AsyncStorage.clearItem('authorization_token');
     this.props.navigation.dispatch(StackActions.popToTop());
   }
 
@@ -60,9 +56,16 @@ export default class HomeScreen extends React.Component {
     );
     return (
       <View style={styles.container}>
+        <Text onPress={this.logout}>Logout</Text>
         <View style={styles.contents}>
+          <Text>Items</Text>
           {items}
         </View>
+        <Button
+          icon={<Icon name='plus' size={15} color='white' type='foundation' />}
+          title="Add"
+          onPress={() => this.props.navigation.navigate('SelectInstitution')}
+        />
       </View>
     );
   }
@@ -80,5 +83,6 @@ const styles = StyleSheet.create({
   contents: {
     alignItems: 'center',
     marginTop: 50,
+    marginBottom: 50,
   },
 });
