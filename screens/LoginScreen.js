@@ -7,10 +7,11 @@ import {
   Button,
   TouchableHighlight,
   Image,
-  Alert
+  Alert,
 } from 'react-native';
 
 import getEnvVars from '../environment';
+import { TouchableOpacity } from 'react-native-gesture-handler';
 const { apiUrl } = getEnvVars();
 
 export default class LoginView extends Component {
@@ -48,6 +49,7 @@ export default class LoginView extends Component {
   render() {
     return (
       <View style={styles.container}>
+        <Text style={styles.inputLabel}>Email</Text>
         <View style={styles.inputContainer}>
           <TextInput style={styles.inputs}
             placeholder="Email"
@@ -56,7 +58,9 @@ export default class LoginView extends Component {
             onChangeText={(email) => this.setState({email})}/>
         </View>
         
+        <Text style={styles.inputLabel}>Password</Text>
         <View style={styles.inputContainer}>
+          
           <TextInput style={styles.inputs}
             placeholder="Password"
             secureTextEntry={true}
@@ -64,16 +68,26 @@ export default class LoginView extends Component {
             onChangeText={(password) => this.setState({password})}/>
         </View>
 
-        <TouchableHighlight style={[styles.buttonContainer, styles.loginButton]} onPress={this.onLoginPress}>
-          <Text style={styles.loginText}>Login</Text>
+        <TouchableHighlight style={styles.buttonContainer} onPress={this.onLoginPress}>
+          <Text style={styles.loginText}>Login -></Text>
         </TouchableHighlight>
 
-        <TouchableHighlight style={styles.buttonContainer} onPress={() => null}>
-            <Text>Forgot your password?</Text>
+        <TouchableOpacity style={styles.buttonLink} onPress={() => null}>
+            <Text style={styles.forgotPassword}>Forgot your password?</Text>
+        </TouchableOpacity>
+
+        <View style={styles.separator} />
+
+        <TouchableHighlight style={[styles.buttonContainer, styles.buttonOutline]} onPress={this.onLoginPress}>
+          <Text style={styles.loginSocial}>Log in With Google</Text>
+        </TouchableHighlight>
+
+        <TouchableHighlight style={[styles.buttonContainer, styles.buttonOutline]} onPress={this.onLoginPress}>
+          <Text style={styles.loginSocial}>Log in With Facebook</Text>
         </TouchableHighlight>
 
         <TouchableHighlight style={styles.buttonContainer} onPress={this.onRegisterPress}>
-          <Text>Register</Text>
+          <Text style={styles.loginText}>Register</Text>
         </TouchableHighlight>
       </View>
     );
@@ -84,17 +98,17 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: '#DCDCDC',
+    alignItems: 'flex-start',
+    margin:16,
   },
   inputContainer: {
-      borderBottomColor: '#F5FCFF',
-      backgroundColor: '#FFFFFF',
-      borderRadius:30,
-      borderBottomWidth: 1,
-      width:250,
+      borderColor: '#CBCEDB',
+      backgroundColor: '#E2E4EE',
+      borderRadius:4,
+      borderWidth: 1,
+      width:'100%',
       height:45,
-      marginBottom:20,
+      marginBottom:12,
       flexDirection: 'row',
       alignItems:'center'
   },
@@ -103,6 +117,12 @@ const styles = StyleSheet.create({
       marginLeft:16,
       borderBottomColor: '#FFFFFF',
       flex:1,
+  },
+  inputLabel:{
+      fontSize:14,
+      textAlign: 'left',
+      marginBottom: 4,
+      width: '100%',
   },
   inputIcon:{
     width:30,
@@ -115,14 +135,35 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'center',
     alignItems: 'center',
-    marginBottom:20,
-    width:250,
-    borderRadius:30,
+    marginBottom:12,
+    width:'100%',
+    borderRadius:4,
+    backgroundColor: "#07152F",
   },
-  loginButton: {
-    backgroundColor: "#00b5ec",
+  buttonLink:{
+    paddingTop:4,
   },
+  buttonOutline:{
+    borderColor: "#07152F",
+    backgroundColor: '#ffffff',
+    borderRadius:4,
+    borderWidth: 1,
+  },  
   loginText: {
     color: 'white',
+    fontWeight: 'bold'
+  },
+  loginSocial: {
+    color:  "#07152F",
+    fontWeight: 'bold'
+  },
+  forgotPassword:{
+    textAlign: 'left',
+  },
+  separator: {
+    marginVertical: 16,
+    width: '100%',
+    borderBottomColor: '#07152F',
+    borderBottomWidth: StyleSheet.hairlineWidth,
   }
 });
