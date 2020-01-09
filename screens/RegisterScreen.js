@@ -19,6 +19,7 @@ export default class RegisterView extends Component {
     this.state = {
       email: '',
       password: '',
+      confirmPassword: '',
     };
     this.onRegisterClick = this.onRegisterClick.bind(this);
   }
@@ -57,6 +58,14 @@ export default class RegisterView extends Component {
             secureTextEntry={true}
             underlineColorAndroid='transparent'
             onChangeText={(password) => this.setState({password})}/>
+        </View>
+
+        <View style={styles.inputContainer}>
+          <TextInput style={styles.inputs}
+            placeholder="Confirm Password"
+            secureTextEntry={true}
+            underlineColorAndroid='transparent'
+            onChangeText={(confirmPassword) => this.setState({confirmPassword})}/>
         </View>
 
         <TouchableHighlight style={[styles.buttonContainer, styles.registerButton]} onPress={this.onRegisterClick}>

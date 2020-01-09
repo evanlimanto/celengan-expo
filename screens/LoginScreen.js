@@ -1,14 +1,14 @@
 import React, { Component } from 'react';
 import {
+  Alert,
+  AsyncStorage,
+  Image,
   StyleSheet,
   Text,
-  View,
-  TextInput,
-  Button,
   TouchableHighlight,
-  Image,
-  Alert
+  View,
 } from 'react-native';
+import { Button, Input } from 'react-native-elements';
 
 import getEnvVars from '../environment';
 const { apiUrl } = getEnvVars();
@@ -19,6 +19,7 @@ export default class LoginView extends Component {
     this.state = {
       email: '',
       password: '',
+      errorMessage: '',
     };
     this.onLoginPress = this.onLoginPress.bind(this);
     this.onRegisterPress = this.onRegisterPress.bind(this);
@@ -37,7 +38,13 @@ export default class LoginView extends Component {
         password,
       }),
     });
+    const status = rawResponse.status;
+    if (status !== 200) {
+      this.setState({ errorMessage: 'Failed to login!' });
+      return;
+    }
     await AsyncStorage.setItem('authorization_token', `${email}:${password}`)
+    this.setState({ errorMessage: '' });
     this.props.navigation.navigate('Home');
   }
 
@@ -49,7 +56,7 @@ export default class LoginView extends Component {
     return (
       <View style={styles.container}>
         <View style={styles.inputContainer}>
-          <TextInput style={styles.inputs}
+          <Input style={styles.inputs}
             placeholder="Email"
             keyboardType="email-address"
             underlineColorAndroid='transparent'
@@ -57,24 +64,17 @@ export default class LoginView extends Component {
         </View>
         
         <View style={styles.inputContainer}>
-          <TextInput style={styles.inputs}
+          <Input style={styles.inputs}
             placeholder="Password"
             secureTextEntry={true}
             underlineColorAndroid='transparent'
             onChangeText={(password) => this.setState({password})}/>
         </View>
 
-        <TouchableHighlight style={[styles.buttonContainer, styles.loginButton]} onPress={this.onLoginPress}>
-          <Text style={styles.loginText}>Login</Text>
-        </TouchableHighlight>
+        <Button title="Login" onPress={this.onLoginPress} buttonStyle={styles.button} />
+        <Button title="Register" onPress={this.onRegisterPress} buttonStyle={styles.button} />
 
-        <TouchableHighlight style={styles.buttonContainer} onPress={() => null}>
-            <Text>Forgot your password?</Text>
-        </TouchableHighlight>
-
-        <TouchableHighlight style={styles.buttonContainer} onPress={this.onRegisterPress}>
-          <Text>Register</Text>
-        </TouchableHighlight>
+        <Text>{this.state.errorMessage}</Text>
       </View>
     );
   }
@@ -85,44 +85,30 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: '#DCDCDC',
   },
   inputContainer: {
-      borderBottomColor: '#F5FCFF',
-      backgroundColor: '#FFFFFF',
-      borderRadius:30,
-      borderBottomWidth: 1,
-      width:250,
-      height:45,
-      marginBottom:20,
-      flexDirection: 'row',
-      alignItems:'center'
+    borderBottomColor: '#F5FCFF',
+    backgroundColor: '#FFFFFF',
+    borderRadius:30,
+    borderBottomWidth: 1,
+    width:250,
+    height:45,
+    marginBottom:20,
+    flexDirection: 'row',
+    alignItems:'center'
   },
   inputs:{
-      height:45,
-      marginLeft:16,
-      borderBottomColor: '#FFFFFF',
-      flex:1,
-  },
-  inputIcon:{
-    width:30,
-    height:30,
-    marginLeft:15,
-    justifyContent: 'center'
-  },
-  buttonContainer: {
     height:45,
+    marginLeft:16,
+    borderBottomColor: '#FFFFFF',
+    flex:1,
+  },
+  button: {
+    backgroundColor: "#00b5ec",
     flexDirection: 'row',
     justifyContent: 'center',
     alignItems: 'center',
-    marginBottom:20,
     width:250,
-    borderRadius:30,
+    margin: 10,
   },
-  loginButton: {
-    backgroundColor: "#00b5ec",
-  },
-  loginText: {
-    color: 'white',
-  }
 });
