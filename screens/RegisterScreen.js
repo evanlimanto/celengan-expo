@@ -95,9 +95,6 @@ export default class RegisterView extends Component {
           <Text style={styles.loginSocial}>Sign Up With Facebook</Text>
         </TouchableHighlight>
 
-        <TouchableHighlight style={styles.buttonContainer} onPress={() => null}>
-          <Text style={styles.loginText}>Login</Text>
-        </TouchableHighlight>
       </View>
     );
   }
@@ -106,7 +103,7 @@ export default class RegisterView extends Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: 'center',
+    justifyContent: 'flex-start',
     alignItems: 'flex-start',
     margin:16,
   },

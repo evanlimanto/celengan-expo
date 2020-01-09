@@ -85,9 +85,7 @@ export default class LoginView extends Component {
           <Text style={styles.loginSocial}>Log in With Facebook</Text>
         </TouchableHighlight>
 
-        <TouchableHighlight style={styles.buttonContainer} onPress={this.onRegisterPress}>
-          <Text style={styles.loginText}>Register</Text>
-        </TouchableHighlight>
+        <Text style={styles.privacyLink}>Privacy &amp; Security</Text>
       </View>
     );
   }
@@ -96,7 +94,7 @@ export default class LoginView extends Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: 'center',
+    justifyContent: 'flex-start',
     alignItems: 'flex-start',
     margin:16,
   },
@@ -164,5 +162,13 @@ const styles = StyleSheet.create({
     width: '100%',
     borderBottomColor: '#07152F',
     borderBottomWidth: StyleSheet.hairlineWidth,
+  },
+  privacyLink:{
+    fontSize: 12,
+    opacity:0.5,
+    textDecorationLine: 'underline',
+    width: '100%',
+    textAlign: 'center',
+    marginTop: 24
   }
 });
