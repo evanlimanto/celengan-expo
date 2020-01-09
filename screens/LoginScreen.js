@@ -8,7 +8,7 @@ import {
   TouchableHighlight,
   View,
 } from 'react-native';
-import { Button, Input } from 'react-native-elements';
+import { Button, Icon, Input } from 'react-native-elements';
 
 import getEnvVars from '../environment';
 import { TouchableOpacity } from 'react-native-gesture-handler';
@@ -74,23 +74,44 @@ export default class LoginView extends Component {
             onChangeText={(password) => this.setState({password})}/>
         </View>
 
-        <TouchableHighlight style={styles.buttonContainer} onPress={this.onLoginPress}>
-          <Text style={styles.loginText}>Login -></Text>
-        </TouchableHighlight>
+        <Button
+          buttonStyle={styles.loginButton}
+          containerStyle={{ width: '100%' }}
+          onPress={this.onLoginPress}
+          title="Log in "
+          titleStyle={{ fontSize: 16 }}
+          icon={
+            <Icon
+              name="arrowright"
+              size={15}
+              color="white"
+              type="antdesign"
+            />
+          }
+          iconRight
+        />
 
         <TouchableOpacity style={styles.buttonLink} onPress={() => null}>
-            <Text style={styles.forgotPassword}>Forgot your password?</Text>
+          <Text style={styles.forgotPassword}>Forgot your password?</Text>
         </TouchableOpacity>
 
         <View style={styles.separator} />
 
-        <TouchableHighlight style={[styles.buttonContainer, styles.buttonOutline]} onPress={this.onLoginPress}>
-          <Text style={styles.loginSocial}>Log in With Google</Text>
-        </TouchableHighlight>
+        <Button
+          buttonStyle={styles.buttonSocial}
+          containerStyle={styles.buttonContainerSocial}
+          onPress={this.onLoginPress}
+          title="Log in With Google"
+          titleStyle={styles.buttonTitleSocial}
+        />
 
-        <TouchableHighlight style={[styles.buttonContainer, styles.buttonOutline]} onPress={this.onLoginPress}>
-          <Text style={styles.loginSocial}>Log in With Facebook</Text>
-        </TouchableHighlight>
+        <Button
+          buttonStyle={styles.buttonSocial}
+          containerStyle={styles.buttonContainerSocial}
+          onPress={this.onLoginPress}
+          title="Log in With Facebook"
+          titleStyle={styles.buttonTitleSocial}
+        />
 
         <Text style={styles.privacyLink}>Privacy &amp; Security</Text>
       </View>
@@ -106,27 +127,27 @@ const styles = StyleSheet.create({
     margin:16,
   },
   inputContainer: {
-      borderColor: '#CBCEDB',
-      backgroundColor: '#E2E4EE',
-      borderRadius:4,
-      borderWidth: 1,
-      width:'100%',
-      height:45,
-      marginBottom:12,
-      flexDirection: 'row',
-      alignItems:'center'
+    borderColor: '#CBCEDB',
+    backgroundColor: '#E2E4EE',
+    borderRadius:4,
+    borderWidth: 1,
+    width:'100%',
+    height:45,
+    marginBottom:12,
+    flexDirection: 'row',
+    alignItems:'center'
   },
   inputs:{
-      height:45,
-      marginLeft:16,
-      borderBottomColor: '#FFFFFF',
-      flex:1,
+    height:45,
+    marginLeft:16,
+    borderBottomColor: '#FFFFFF',
+    flex:1,
   },
   inputLabel:{
-      fontSize:14,
-      textAlign: 'left',
-      marginBottom: 4,
-      width: '100%',
+    fontSize:14,
+    textAlign: 'left',
+    marginBottom: 4,
+    width: '100%',
   },
   inputIcon:{
     width:30,
@@ -134,11 +155,10 @@ const styles = StyleSheet.create({
     marginLeft:15,
     justifyContent: 'center'
   },
-  buttonContainer: {
-    height:45,
-    marginLeft:16,
-    borderBottomColor: '#FFFFFF',
-    flex:1,
+  loginButton: {
+    backgroundColor: '#08152F',
+    flex: 1,
+    flexDirection: 'row',
   },
   button: {
     backgroundColor: "#00b5ec",
@@ -151,7 +171,7 @@ const styles = StyleSheet.create({
     backgroundColor: "#07152F",
   },
   buttonLink:{
-    paddingTop:4,
+    marginTop: 20,
   },
   buttonOutline:{
     borderColor: "#07152F",
@@ -163,12 +183,24 @@ const styles = StyleSheet.create({
     color: 'white',
     fontWeight: 'bold'
   },
-  loginSocial: {
-    color:  "#07152F",
-    fontWeight: 'bold'
+  buttonTitleSocial: {
+    color: "#07152F",
+    fontWeight: 'bold',
+  },
+  buttonSocial: {
+    backgroundColor: "#FFFFFF",
+    borderColor: "#07152F",
+  },
+  buttonContainerSocial: {
+    borderColor: "#07152F",
+    borderWidth: '1px',
+    width: '100%',
+    height: 45,
+    marginTop: 10,
   },
   forgotPassword:{
     textAlign: 'left',
+    fontSize: 12,
   },
   separator: {
     marginVertical: 16,
