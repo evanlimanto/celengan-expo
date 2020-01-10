@@ -15,7 +15,7 @@ const config = {
     web: { headerMode: 'screen' },
     default: {},
   }),
-  initialRouteName: 'SelectInstitution',
+  initialRouteName: 'InputCredentials',
 };
 
 const HomeStack = createStackNavigator(

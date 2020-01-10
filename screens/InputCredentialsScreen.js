@@ -4,7 +4,7 @@ import {
   StyleSheet,
   View,
 } from 'react-native';
-import { Button } from 'react-native-elements';
+import { Button, Icon, Input, Image} from 'react-native-elements';
 
 import getEnvVars from '../environment';
 const { apiUrl } = getEnvVars();
@@ -23,29 +23,69 @@ export default class InputCredentialsScreen extends React.Component {
     this.state = {
       username: '',
       password: '',
+      security: ''
     };
   }
 
   render() {
     return (
       <View style={styles.container}>
-        <View style={styles.inputContainer}>
-          <Input style={styles.inputs}
-            placeholder="Username"
-            keyboardType="username"
+        <View style={styles.imageContainer}>
+          <Image
+            style={styles.imageStyle}
+            resizeMode="contain"
+            source={require(`../assets/images/bca.png`)}
+            />
+        </View>
+        <Input 
+            label="User ID"
+            labelStyle={styles.inputLabel}
+            containerStyle={styles.inputContainer}
+            inputContainerStyle={styles.inputContainerStyle}
+            inputStyle={styles.inputStyle}
+            secureTextEntry={true}
             underlineColorAndroid='transparent'
             onChangeText={(username) => this.setState({username})}/>
-        </View>
-        
-        <View style={styles.inputContainer}>
-          <Input style={styles.inputs}
-            placeholder="Password"
+
+        <Input 
+            label="Password"
+            labelStyle={styles.inputLabel}
+            containerStyle={styles.inputContainer}
+            inputContainerStyle={styles.inputContainerStyle}
+            inputStyle={styles.inputStyle}
             secureTextEntry={true}
             underlineColorAndroid='transparent'
             onChangeText={(password) => this.setState({password})}/>
+
+        <View style={styles.captchaArea}>
+            
         </View>
 
-        <Button title="Login" onPress={this.onLoginPress} buttonStyle={styles.button} />
+        <Input 
+            label="Security Code"
+            labelStyle={styles.inputLabel}
+            containerStyle={styles.inputContainer}
+            inputContainerStyle={styles.inputContainerStyle}
+            inputStyle={styles.inputStyle}
+            underlineColorAndroid='transparent'
+            onChangeText={(security) => this.setState({security})}/>
+
+        <Button
+          buttonStyle={styles.loginButton}
+          containerStyle={styles.buttonContainerSocial}
+          onPress={this.onLoginPress}
+          title="Continue "
+          titleStyle={{ fontSize: 14, fontWeight:'bold', color:'#07152F' }}
+          icon={
+            <Icon
+              name="arrowright"
+              size={14}
+              color="#07152F"
+              type="antdesign"
+            />
+          }
+          iconRight
+        />
       </View>
     );
   }
@@ -54,24 +94,66 @@ export default class InputCredentialsScreen extends React.Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
+    justifyContent: 'flex-start',
+    alignItems: 'center',
+    padding:16,
+    backgroundImage:'linear-gradient(139deg, #0094ff, #206fff)',
   },
   inputContainer: {
-    borderBottomColor: '#F5FCFF',
-    backgroundColor: '#FFFFFF',
-    borderRadius:30,
-    borderBottomWidth: 1,
-    width:250,
-    height:45,
-    marginBottom:20,
-    flexDirection: 'row',
-    alignItems:'center'
+    marginBottom:12,
+    paddingLeft: 0,
+    paddingRight: 0
   },
-  inputs:{
-    height:45,
-    marginLeft:16,
-    borderBottomColor: '#FFFFFF',
+  inputContainerStyle:{
+    height:40,
     flex:1,
+    borderColor: '#FFFFFF',
+    backgroundColor: 'rgba(255,255,255,0.25)',
+    borderRadius:4,
+    borderWidth: 1,
+    width:'100%',
   },
+  inputStyle:{
+    fontSize: 14,
+    paddingLeft: 12,
+  },
+  inputLabel:{
+    fontSize:14,
+    textAlign: 'left',
+    marginBottom: 4,
+    width: '100%',
+    fontWeight: '400',
+    color: '#fff'
+  },
+  loginButton: {
+    backgroundColor: 'transparent',
+    flex: 1,
+    flexDirection: 'row',
+    height: 40,
+  },
+  buttonContainerSocial: {
+    borderColor: "#fff",
+    backgroundColor: '#fff',
+    borderWidth: '1px',
+    width: '100%',
+    height: 40,
+    marginTop: 10,
+  },
+  captchaArea:{
+    width: '100%',
+    height:56,
+    backgroundColor:'white',
+    marginBottom:12
+  },
+  imageStyle: {
+    height:56,
+  },
+  imageContainer:{
+    minWidth: 160,
+    height:56,
+    backgroundColor: 'white',
+    borderRadius:4,
+    marginBottom:16
+  }
 });
 
