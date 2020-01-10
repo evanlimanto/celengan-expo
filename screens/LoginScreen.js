@@ -56,34 +56,36 @@ export default class LoginView extends Component {
   render() {
     return (
       <View style={styles.container}>
-        <Text style={styles.inputLabel}>Alamat Email</Text>
-        <View style={styles.inputContainer}>
-          <Input style={styles.inputs}
-            placeholder="Email"
+         <Input 
+            label="Email"
+            labelStyle={styles.inputLabel}
+            containerStyle={styles.inputContainer}
+            inputContainerStyle={styles.inputContainerStyle}
+            inputStyle={styles.inputStyle}
             keyboardType="email-address"
             underlineColorAndroid='transparent'
             onChangeText={(email) => this.setState({email})}/>
-        </View>
-        
-        <Text style={styles.inputLabel}>Password</Text>
-        <View style={styles.inputContainer}>
-          <Input style={styles.inputs}
-            placeholder="Password"
+
+          <Input 
+            label="Password"
+            labelStyle={styles.inputLabel}
+            containerStyle={styles.inputContainer}
+            inputContainerStyle={styles.inputContainerStyle}
+            inputStyle={styles.inputStyle}
             secureTextEntry={true}
             underlineColorAndroid='transparent'
             onChangeText={(password) => this.setState({password})}/>
-        </View>
 
         <Button
           buttonStyle={styles.loginButton}
           containerStyle={{ width: '100%' }}
           onPress={this.onLoginPress}
           title="Log in "
-          titleStyle={{ fontSize: 16 }}
+          titleStyle={{ fontSize: 14, fontWeight:'bold' }}
           icon={
             <Icon
               name="arrowright"
-              size={15}
+              size={14}
               color="white"
               type="antdesign"
             />
@@ -101,7 +103,7 @@ export default class LoginView extends Component {
           buttonStyle={styles.buttonSocial}
           containerStyle={styles.buttonContainerSocial}
           onPress={this.onLoginPress}
-          title="Log in With Google"
+          title="Log In With Google"
           titleStyle={styles.buttonTitleSocial}
         />
 
@@ -109,11 +111,16 @@ export default class LoginView extends Component {
           buttonStyle={styles.buttonSocial}
           containerStyle={styles.buttonContainerSocial}
           onPress={this.onLoginPress}
-          title="Log in With Facebook"
+          title="Log In With Facebook"
           titleStyle={styles.buttonTitleSocial}
         />
 
-        <Text style={styles.privacyLink}>Privacy &amp; Security</Text>
+        <Button
+          buttonStyle={styles.buttonPrivacy}
+          titleStyle={styles.buttonTitlePrivacy}
+          containerStyle={styles.buttonContainerPrivacy}
+          title='Privacy &amp; Security'/>
+
       </View>
     );
   }
@@ -127,27 +134,31 @@ const styles = StyleSheet.create({
     margin:16,
   },
   inputContainer: {
+    marginBottom:12,
+    paddingLeft: 0,
+    paddingRight: 0
+  },
+  inputContainerStyle:{
+    height:40,
+    borderColor: '#FFFFFF',
+    flex:1,
     borderColor: '#CBCEDB',
     backgroundColor: '#E2E4EE',
     borderRadius:4,
     borderWidth: 1,
     width:'100%',
-    height:45,
-    marginBottom:12,
-    flexDirection: 'row',
-    alignItems:'center'
   },
-  inputs:{
-    height:45,
-    marginLeft:16,
-    borderBottomColor: '#FFFFFF',
-    flex:1,
+  inputStyle:{
+    fontSize: 14,
+    paddingLeft: 12,
   },
   inputLabel:{
     fontSize:14,
     textAlign: 'left',
     marginBottom: 4,
     width: '100%',
+    fontWeight: '400',
+    color: '#07152F'
   },
   inputIcon:{
     width:30,
@@ -165,7 +176,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'center',
     alignItems: 'center',
-    marginBottom:12,
+    marginBottom: 12,
     width:'100%',
     borderRadius:4,
     backgroundColor: "#07152F",
@@ -185,6 +196,7 @@ const styles = StyleSheet.create({
   },
   buttonTitleSocial: {
     color: "#07152F",
+    fontSize: 14,
     fontWeight: 'bold',
   },
   buttonSocial: {
@@ -195,7 +207,7 @@ const styles = StyleSheet.create({
     borderColor: "#07152F",
     borderWidth: '1px',
     width: '100%',
-    height: 45,
+    height: 40,
     marginTop: 10,
   },
   forgotPassword:{
@@ -208,12 +220,18 @@ const styles = StyleSheet.create({
     borderBottomColor: '#07152F',
     borderBottomWidth: StyleSheet.hairlineWidth,
   },
-  privacyLink:{
+  buttonContainerPrivacy:{
+    width:'100%'
+  },
+  buttonPrivacy:{
+    margin: 24,
+    backgroundColor:'transparent'
+  },
+  buttonTitlePrivacy:{
     fontSize: 12,
     opacity:0.5,
+    color:'#07152F',
     textDecorationLine: 'underline',
-    width: '100%',
     textAlign: 'center',
-    marginTop: 24
   }
 });

@@ -4,12 +4,12 @@ import {
   Text,
   View,
   TextInput,
-  Button,
   TouchableHighlight,
   TouchableOpacity,
   Image,
   Alert
 } from 'react-native';
+import { Button, Icon, Input } from 'react-native-elements';
 
 import getEnvVars from '../environment';
 const { apiUrl } = getEnvVars();
@@ -47,63 +47,96 @@ export default class RegisterView extends Component {
   render() {
     return (
       <View style={styles.container}>
-        <Text style={styles.inputLabel}>Alamat Email</Text>
-        <View style={styles.inputContainer}>
-          <TextInput style={styles.inputs}
-            placeholder="Email"
+        <Input 
+            label="Alamat Email"
+            labelStyle={styles.inputLabel}
+            containerStyle={styles.inputContainer}
+            inputContainerStyle={styles.inputContainerStyle}
+            inputStyle={styles.inputStyle}
             keyboardType="email-address"
             underlineColorAndroid='transparent'
             onChangeText={(email) => this.setState({email})}/>
-        </View>
-        <Text style={styles.inputLabel}>Nama Lengkap</Text>
-        <View style={styles.inputContainer}>
-          <TextInput style={styles.inputs}
-            placeholder="Full Name"
-            secureTextEntry={true}
+
+        <Input 
+            label="Nama Lengkap"
+            labelStyle={styles.inputLabel}
+            containerStyle={styles.inputContainer}
+            inputContainerStyle={styles.inputContainerStyle}
+            inputStyle={styles.inputStyle}
             underlineColorAndroid='transparent'
             onChangeText={(fullName) => this.setState({fullName})}/>
-        </View>
 
-        <Text style={styles.inputLabel}>Password</Text>
-        <View style={styles.inputContainer}>
-          <TextInput style={styles.inputs}
-            placeholder="Password"
+        <Input 
+            label="Password"
+            labelStyle={styles.inputLabel}
+            containerStyle={styles.inputContainer}
+            inputContainerStyle={styles.inputContainerStyle}
+            inputStyle={styles.inputStyle}
             secureTextEntry={true}
             underlineColorAndroid='transparent'
             onChangeText={(password) => this.setState({password})}/>
-        </View>
 
-        <View style={styles.inputContainer}>
-          <TextInput style={styles.inputs}
-            placeholder="Confirm Password"
+        <Input 
+            label="Confirm Password"
+            labelStyle={styles.inputLabel}
+            containerStyle={styles.inputContainer}
+            inputContainerStyle={styles.inputContainerStyle}
+            inputStyle={styles.inputStyle}
             secureTextEntry={true}
             underlineColorAndroid='transparent'
             onChangeText={(confirmPassword) => this.setState({confirmPassword})}/>
-        </View>
 
-        <Text style={styles.inputLabel}>No. Telpon</Text>
-        <View style={styles.inputContainer}>
-          <TextInput style={styles.inputs}
-            placeholder="Phone Number"
-            secureTextEntry={true}
+        <Input 
+            label="Nomor Handphone"
+            labelStyle={styles.inputLabel}
+            containerStyle={styles.inputContainer}
+            inputContainerStyle={styles.inputContainerStyle}
+            inputStyle={styles.inputStyle}
+            keyboardType="phone-pad"
             underlineColorAndroid='transparent'
-            onChangeText={(phone) => this.setState({phone})}/>
-        </View>
+            onChangeText={(fullName) => this.setState({fullName})}/>
 
-        <TouchableHighlight style={styles.buttonContainer} onPress={this.onRegisterClick}>
-          <Text style={styles.loginText}>Sign Up -></Text>
-        </TouchableHighlight>
+        <Button
+          buttonStyle={styles.loginButton}
+          containerStyle={{ width: '100%' }}
+          onPress={this.onLoginPress}
+          title="Sign Up "
+          titleStyle={{ fontSize: 14, fontWeight:'bold' }}
+          icon={
+            <Icon
+              name="arrowright"
+              size={14}
+              color="white"
+              type="antdesign"
+            />
+          }
+          iconRight
+        />
 
         <View style={styles.separator} />
 
-        <TouchableHighlight style={[styles.buttonContainer, styles.buttonOutline]} onPress={this.onLoginPress}>
-          <Text style={styles.loginSocial}>Sign Up With Google</Text>
-        </TouchableHighlight>
 
-        <TouchableHighlight style={[styles.buttonContainer, styles.buttonOutline]} onPress={this.onLoginPress}>
-          <Text style={styles.loginSocial}>Sign Up With Facebook</Text>
-        </TouchableHighlight>
+        <Button
+          buttonStyle={styles.buttonSocial}
+          containerStyle={styles.buttonContainerSocial}
+          onPress={this.onLoginPress}
+          title="Sign Up With Google"
+          titleStyle={styles.buttonTitleSocial}
+        />
 
+        <Button
+          buttonStyle={styles.buttonSocial}
+          containerStyle={styles.buttonContainerSocial}
+          onPress={this.onLoginPress}
+          title="Sign Up With Facebook"
+          titleStyle={styles.buttonTitleSocial}
+        />
+        
+        <Button
+          buttonStyle={styles.buttonPrivacy}
+          titleStyle={styles.buttonTitlePrivacy}
+          containerStyle={styles.buttonContainerPrivacy}
+          title='Privacy &amp; Security'/>
       </View>
     );
   }
@@ -117,27 +150,31 @@ const styles = StyleSheet.create({
     margin:16,
   },
   inputContainer: {
-      borderColor: '#CBCEDB',
-      backgroundColor: '#E2E4EE',
-      borderRadius:4,
-      borderWidth: 1,
-      width:'100%',
-      height:45,
-      marginBottom:12,
-      flexDirection: 'row',
-      alignItems:'center'
+    marginBottom:12,
+    paddingLeft: 0,
+    paddingRight: 0
   },
-  inputs:{
-      height: 45,
-      marginLeft: 16,
-      borderBottomColor: '#FFFFFF',
-      flex:1,
+  inputContainerStyle:{
+    height:40,
+    borderColor: '#FFFFFF',
+    flex:1,
+    borderColor: '#CBCEDB',
+    backgroundColor: '#E2E4EE',
+    borderRadius:4,
+    borderWidth: 1,
+    width:'100%',
+  },
+  inputStyle:{
+    fontSize: 14,
+    paddingLeft: 12,
   },
   inputLabel:{
-      fontSize: 14,
-      textAlign: 'left',
-      marginBottom: 4,
-      width: '100%',
+    fontSize:14,
+    textAlign: 'left',
+    marginBottom: 4,
+    width: '100%',
+    fontWeight: '400',
+    color: '#07152F'
   },
   inputIcon:{
     width:30,
@@ -145,18 +182,23 @@ const styles = StyleSheet.create({
     marginLeft:15,
     justifyContent: 'center'
   },
-  buttonContainer: {
-    height:45,
+  loginButton: {
+    backgroundColor: '#08152F',
+    flex: 1,
+    flexDirection: 'row',
+  },
+  button: {
+    backgroundColor: "#00b5ec",
     flexDirection: 'row',
     justifyContent: 'center',
     alignItems: 'center',
-    marginBottom:12,
+    marginBottom: 12,
     width:'100%',
     borderRadius:4,
     backgroundColor: "#07152F",
   },
   buttonLink:{
-    paddingTop:4,
+    marginTop: 20,
   },
   buttonOutline:{
     borderColor: "#07152F",
@@ -168,18 +210,45 @@ const styles = StyleSheet.create({
     color: 'white',
     fontWeight: 'bold'
   },
-  loginSocial: {
-    color:  "#07152F",
-    fontWeight: 'bold'
+  buttonTitleSocial: {
+    color: "#07152F",
+    fontSize: 14,
+    fontWeight: 'bold',
+  },
+  buttonSocial: {
+    backgroundColor: "#FFFFFF",
+    borderColor: "#07152F",
+  },
+  buttonContainerSocial: {
+    borderColor: "#07152F",
+    borderWidth: '1px',
+    width: '100%',
+    height: 40,
+    marginTop: 10,
   },
   forgotPassword:{
     textAlign: 'left',
+    fontSize: 12,
   },
   separator: {
-    marginBottom: 16,
+    marginVertical: 16,
     width: '100%',
     borderBottomColor: '#07152F',
     borderBottomWidth: StyleSheet.hairlineWidth,
+  },
+  buttonContainerPrivacy:{
+    width:'100%'
+  },
+  buttonPrivacy:{
+    margin: 24,
+    backgroundColor:'transparent'
+  },
+  buttonTitlePrivacy:{
+    fontSize: 12,
+    opacity:0.5,
+    color:'#07152F',
+    textDecorationLine: 'underline',
+    textAlign: 'center',
   }
 });
 
