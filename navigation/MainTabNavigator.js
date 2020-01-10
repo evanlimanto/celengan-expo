@@ -15,7 +15,7 @@ const config = {
     web: { headerMode: 'screen' },
     default: {},
   }),
-  initialRouteName: 'Login',
+  initialRouteName: 'SelectInstitution',
 };
 
 const HomeStack = createStackNavigator(
