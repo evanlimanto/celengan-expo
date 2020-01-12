@@ -120,7 +120,6 @@ export default class LoginView extends Component {
           titleStyle={styles.buttonTitlePrivacy}
           containerStyle={styles.buttonContainerPrivacy}
           title='Privacy &amp; Security'/>
-
       </View>
     );
   }
@@ -228,7 +227,7 @@ const styles = StyleSheet.create({
     backgroundColor:'transparent'
   },
   buttonTitlePrivacy:{
-    fontSize: 12,
+    fontSize: 14,
     opacity:0.5,
     color:'#07152F',
     textDecorationLine: 'underline',

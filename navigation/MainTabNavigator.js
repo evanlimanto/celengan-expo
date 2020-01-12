@@ -9,13 +9,14 @@ import HomeScreen from '../screens/HomeScreen';
 import InputCredentialsScreen from '../screens/InputCredentialsScreen';
 import LoginScreen from '../screens/LoginScreen';
 import RegisterScreen from '../screens/RegisterScreen';
+import Onboarding from '../screens/Onboarding'
 
 const config = {
   ...Platform.select({
     web: { headerMode: 'screen' },
     default: {},
   }),
-  initialRouteName: 'InputCredentials',
+  initialRouteName: 'Onboarding',
 };
 
 const HomeStack = createStackNavigator(
@@ -25,6 +26,7 @@ const HomeStack = createStackNavigator(
     Login: LoginScreen,
     Home: HomeScreen,
     Register: RegisterScreen,
+    Onboarding: Onboarding,
   },
   config
 );
