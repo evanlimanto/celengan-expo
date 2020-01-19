@@ -16,7 +16,7 @@ const config = {
     web: { headerMode: 'screen' },
     default: {},
   }),
-  initialRouteName: 'Onboarding',
+  initialRouteName: 'Home',
 };
 
 const HomeStack = createStackNavigator(
